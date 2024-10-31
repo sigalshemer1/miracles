@@ -1,0 +1,31 @@
+/* ImageGeneratorPage.css */
+.image-generator-page {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .image-container {
+    margin-top: 20px;
+  }
+  
+  .generated-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
