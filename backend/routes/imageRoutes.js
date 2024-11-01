@@ -3,6 +3,7 @@ import { generateImage } from '../controllers/imageController.js';
 
 const router = express.Router();
 
-router.post('/generate-image', generateImage);
+// Define the image generation route
+router.post('/generate-image', generateImage); 
 
 export default router;

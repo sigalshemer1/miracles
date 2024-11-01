@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './ImageGeneratorPage.css'; // Optional: for styling
+import './ImageGeneratorPage.css';
 
 const ImageGeneratorPage = () => {
   const [prompt, setPrompt] = useState(''); // State for user input
@@ -10,19 +10,24 @@ const ImageGeneratorPage = () => {
 
   // Function to handle image generation
   const handleGenerateImage = async () => {
-    setLoading(true); // Set loading to true when the request starts
-    setError(null); // Clear any previous errors
-
+    setLoading(true);
+    setError(null);
+    setImageUrl(null); // Reset imageUrl when a new request is made
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}`, { prompt });
-      setImageUrl(response.data.imageUrl); // Update the imageUrl state with the generated image URL
+        const response = await axios.post("http://localhost:5000/api/generate-image", { prompt });
+        const newImageUrl = response.data.imageUrl;
+        setImageUrl(newImageUrl);
     } catch (err) {
-      console.error("Error generating image:", err);
-      setError("Failed to generate image. Please try again."); // Set error message
+        console.error("Error generating image:", err);
+        if (err.response) {
+            setError(`Error: ${err.response.data.error || "Failed to generate image."}`);
+        } else {
+            setError("Network error. Please check your connection and try again.");
+        }
     } finally {
-      setLoading(false); // Set loading to false when the request ends
+        setLoading(false);
     }
-  };
+};
 
   return (
     <div className="image-generator-page">
